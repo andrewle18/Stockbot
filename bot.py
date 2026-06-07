@@ -144,9 +144,29 @@ def get_crypto(sym):
     except Exception as e:
         return None
 
+NAME_TO_TICKER = {
+    # US - Big Tech
+    "APPLE": "AAPL", "TESLA": "TSLA", "GOOGLE": "GOOGL", "ALPHABET": "GOOGL",
+    "AMAZON": "AMZN", "MICROSOFT": "MSFT", "META": "META", "FACEBOOK": "META",
+    "NETFLIX": "NFLX", "NVIDIA": "NVDA", "SAMSUNG": "005930.KS",
+    "DISNEY": "DIS", "TWITTER": "X", "UBER": "UBER", "AIRBNB": "ABNB",
+    "COINBASE": "COIN", "PALANTIR": "PLTR", "OPENAI": "MSFT",
+    # VN phổ biến
+    "VINAMILK": "VNM", "VINHOMES": "VHM", "VINGROUP": "VIC",
+    "HOA PHAT": "HPG", "HOAPHAT": "HPG", "MASAN": "MSN",
+    "TECHCOMBANK": "TCB", "VIETCOMBANK": "VCB", "BIDV": "BID",
+    "VIETINBANK": "CTG", "MB BANK": "MBB", "MBBANK": "MBB",
+    "THE GIOI DI DONG": "MWG", "THEGIOIDIDONG": "MWG",
+    "FPT": "FPT", "SABECO": "SAB", "PETROLIMEX": "PLX",
+    "VIETJET": "VJC", "VIETNAM AIRLINES": "HVN",
+}
+
 def smart_lookup(sym):
     """Auto-detect and lookup symbol"""
     sym = sym.upper().strip()
+    # Check name mapping first
+    if sym in NAME_TO_TICKER:
+        sym = NAME_TO_TICKER[sym]
 
     # Gold keywords
     if sym in ["XAU","GOLD","VANG","VÀNG","AU"]:
